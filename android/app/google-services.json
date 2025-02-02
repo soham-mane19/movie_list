@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "510911192708",
+    "project_id": "favmovies-5de8b",
+    "storage_bucket": "favmovies-5de8b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510911192708:android:425dca895378639dd8acd1",
+        "android_client_info": {
+          "package_name": "com.example.fav_movies"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzqAOj5tjfgewicwvqEbn_bQhs_0NkE34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
