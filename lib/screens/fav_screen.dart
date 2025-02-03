@@ -5,7 +5,9 @@ import 'package:mounarchtech_task/models/fav_movie_model.dart';
 import 'package:mounarchtech_task/services/firebase_repo.dart';
 
 class FavouriteScreen extends StatefulWidget {
-  const FavouriteScreen({super.key});
+  final VoidCallback onUpdateFavorites; 
+
+  const FavouriteScreen({super.key, required this.onUpdateFavorites});
 
   @override
   State<FavouriteScreen> createState() => _FavouriteScreenState();
@@ -22,7 +24,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
 
   Future<List<FavoriteMovieModel>> _fetchFavoriteMovies() async {
     try {
-      // Fetch the list of favorite movies from Firebase
+      
       return await FirebaseRepo.getFavorites();
     } catch (e) {
       print("Error fetching favorite movies: $e");
@@ -31,19 +33,18 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   }
 
   void _removeFavorite(FavoriteMovieModel movie) async {
-    try {
-      // Remove the movie from Firebase
-      await FirebaseRepo.deleteData(movie.docId.toString());
-      
-      // Refresh the favorite movie list after removal
-      setState(() {
-        favoriteMovies = _fetchFavoriteMovies();
-      });
-    } catch (e) {
-      print("Error removing favorite: $e");
-    }
-  }
+  try {
+    await FirebaseRepo.deleteData(movie.docId.toString());
 
+    setState(() {
+      favoriteMovies = _fetchFavoriteMovies();
+    });
+
+    widget.onUpdateFavorites(); // Notify HomeScreen
+  } catch (e) {
+    print("Error removing favorite: $e");
+  }
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
